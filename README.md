@@ -2,6 +2,13 @@
 
 ## Run Locally
 
+Install dependencies (if needed)
+
+```bash
+  sudo pacman -S npm
+  sudo pacman -S stow
+```
+
 Clone the project
 
 ```bash
@@ -14,8 +21,7 @@ Go to the project directory
   cd dotfiles
 ```
 
-Install dependencies (if needed)
-
+Use Stow to create the symlinks
 ```bash
-  sudo pacman -S npm
+  stow .
 ```
