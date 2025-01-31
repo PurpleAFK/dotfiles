@@ -58,12 +58,12 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 alias ls="ls --color"
 
 # Shell Integrations
-# eval "$(fzf)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#eval "$(fzf)"
 
 
 source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
