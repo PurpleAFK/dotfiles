@@ -21,7 +21,6 @@ return {
 				"json",
 				"javascript",
 				"typescript",
-				"tsx",
 				"yaml",
 				"html",
 				"css",
@@ -39,7 +38,6 @@ return {
 				"gitignore",
 				"query",
 				"vimdoc",
-				"c",
 			},
 			incremental_selection = {
 				enable = true,
