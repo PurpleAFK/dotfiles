@@ -5,4 +5,4 @@ return {
   config = true,
 }
 
--- TODO: learn all the shortcuts reguaring surround.
+-- TODO: learn all the shortcuts reguarding surround.
