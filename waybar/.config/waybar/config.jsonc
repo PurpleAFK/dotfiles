@@ -97,7 +97,7 @@
         "max-length": 10
     },
     "custom/launcher":{
-        "format": " ",
+        "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi",
         "tooltip": false,
@@ -116,11 +116,11 @@
         "format": "{icon}",
         "tooltip": false,
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "1": "󰲠",
+            "2": "󰲢",
+            "3": "󰲤",
+            "4": "󰲦",
+            "5": "󰲨",
             "urgent": "",
             "active": "",
             "default": ""
@@ -131,7 +131,7 @@
 }
     },
     "network": {
-        "interface": "enp3s0",
+        "interface": "wlo1",
         "format-wifi": "󰘊 {essid}({signalStrength}%)",
         "format-ethernet": "  {ipaddr}/{cidr}",
         "format-disconnected": "disconnected",
