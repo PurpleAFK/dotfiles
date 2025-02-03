@@ -73,6 +73,7 @@ alias cls="clear"
 alias e="exit"
 
 # Shell Integrations
+export PATH=$PATH:/home/purpleafk/.local/bin
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
 source $HOME/.config/scripts/fzf-git.sh
 source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
