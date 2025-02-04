@@ -19,13 +19,13 @@ version = 3
 
   [[blocks.segments]]
     template = '{{ .UserName }} '
-    foreground = '#BF616A'
+    foreground = '#cba6f7'
     type = 'session'
     style = 'plain'
 
   [[blocks.segments]]
     template = '{{ .Path }} '
-    foreground = '#81A1C1'
+    foreground = '#f5c2e7'
     type = 'path'
     style = 'plain'
 
@@ -71,7 +71,7 @@ version = 3
 
   [[blocks.segments]]
     template = '❯ '
-    foreground = '#B48EAD'
+    foreground = '#f38ba8'
     type = 'status'
     style = 'plain'
     foreground_templates = ['{{ if gt .Code 0 }}#BF616A{{ end }}']
