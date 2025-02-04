@@ -38,7 +38,7 @@ version = 3
 
   [[blocks.segments]]
     template = '{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<#FFAFD7>*</>{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} '
-    foreground = '#6C6C6C'
+    foreground = '#fab387'
     type = 'git'
     style = 'plain'
 
@@ -74,7 +74,7 @@ version = 3
     foreground = '#f38ba8'
     type = 'status'
     style = 'plain'
-    foreground_templates = ['{{ if gt .Code 0 }}#BF616A{{ end }}']
+    foreground_templates = ['{{ if gt .Code 0 }}#fab387{{ end }}']
 
     [blocks.segments.properties]
       always_enabled = true
