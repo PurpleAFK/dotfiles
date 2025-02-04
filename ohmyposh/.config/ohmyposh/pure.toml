@@ -3,7 +3,7 @@ version = 3
 
 [transient_prompt]
   template = '❯ '
-  foreground = '#B48EAD'
+  foreground = '#f38ba8'
   foreground_templates = ['{{ if gt .Code 0 }}#BF616A{{ end }}']
 
 [upgrade]
@@ -71,10 +71,10 @@ version = 3
 
   [[blocks.segments]]
     template = '❯ '
-    foreground = '#f38ba8'
+    foreground = '#cba6f7'
     type = 'status'
     style = 'plain'
-    foreground_templates = ['{{ if gt .Code 0 }}#a6e3a1{{ end }}']
+    foreground_templates = ['{{ if gt .Code 0 }}#cba6f7{{ end }}']
 
     [blocks.segments.properties]
       always_enabled = true
