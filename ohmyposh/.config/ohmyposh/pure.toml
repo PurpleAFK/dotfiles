@@ -57,7 +57,7 @@ version = 3
 
   [[blocks.segments]]
     template = ' {{ .FormattedMs }} '
-    foreground = '#A3BE8C'
+    foreground = '#a6e3a1'
     type = 'executiontime'
     style = 'plain'
 
@@ -74,7 +74,7 @@ version = 3
     foreground = '#f38ba8'
     type = 'status'
     style = 'plain'
-    foreground_templates = ['{{ if gt .Code 0 }}#fab387{{ end }}']
+    foreground_templates = ['{{ if gt .Code 0 }}#a6e3a1{{ end }}']
 
     [blocks.segments.properties]
       always_enabled = true
