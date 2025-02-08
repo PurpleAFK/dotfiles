@@ -85,7 +85,7 @@ alias e="exit"
 
 # Shell Integrations
 export PATH=$PATH:/home/purpleafk/.local/bin
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pure.toml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/new.omp.json)"
 source $HOME/.config/scripts/fzf-git.sh
 source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(zoxide init zsh)"
