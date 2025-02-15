@@ -4,16 +4,16 @@
 	"modules-center": ["clock"],
 	"modules-right": ["tray", "cava", "network", "pulseaudio","battery","custom/power"],
 	
-	"pulseaudio": {
-		"tooltip": false,
-		"scroll-step": 5,
-		"format": "{icon}  {volume}%",
-		"format-muted": "muted",
-		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"format-icons": {
-			"default": ["", "", ""]
-		}
-	},
+	  "pulseaudio": {
+		  "tooltip": false,
+		  "scroll-step": 5,
+		  "format": "{icon}  {volume}%",
+		  "format-muted": "muted",
+		  "on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		  "format-icons": {
+			  "default": ["", "", ""]
+		  }
+	  },
     "cava": {
             "framerate": 240,
             "autosens": 1,
@@ -30,8 +30,8 @@
             "waves": true,
             "noise_reduction": 0.77,
             "input_delay": 0,
-            "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
-             },
+            "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ]
+            },
 
 
 
@@ -84,7 +84,7 @@
 
     "hyprland/language": {
         "format": "  {1}",
-        "tooltip": false,
+        "tooltip": false
     },
     "cpu": {
         "interval": 15,
@@ -100,17 +100,17 @@
         "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi",
-        "tooltip": false,
+        "tooltip": false
     },
     "custom/power":{
         "format": "⏻ ",
         "tooltip": false,
         "on-click": "bash ~/.config/rofi/powermenu.sh",
-        "on-click-right": "killall rofi",
+        "on-click-right": "killall rofi"
     },
     "clock": {
         "format": "  {:%A - %B %d, %Y - %R}",
-        "tooltip": false,
+        "tooltip": false
     },
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -136,6 +136,6 @@
         "format-ethernet": "  {ipaddr}/{cidr}",
         "format-disconnected": "disconnected",
         "tooltip": false,
-        "max-length": 50,
+        "max-length": 50
     }
 }

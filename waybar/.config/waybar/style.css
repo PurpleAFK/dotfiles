@@ -1,6 +1,5 @@
 * {
   border: none;
-  border-radius: 10;
   font-family: "JetbrainsMono Nerd Font";
   font-size: 15px;
   min-height: 10px;
@@ -14,7 +13,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -33,7 +31,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -52,7 +49,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -75,7 +71,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -91,7 +86,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -110,7 +104,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -142,7 +135,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -161,7 +153,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -180,7 +171,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -195,7 +185,6 @@ window#waybar {
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -226,7 +215,6 @@ window#waybar {
   padding-left: 10px;
   margin-bottom: 0px;
   padding-right: 10px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -245,7 +233,6 @@ window#waybar {
   padding-left: 10px;
   margin-bottom: 0px;
   padding-right: 10px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -264,7 +251,6 @@ window#waybar {
   margin-left: 17px;
   padding-left: 10px;
   padding-right: 5px;
-  border-radius: 10px;
   transition: none;
   color: #ebdbb2;
   background: #1d2021;
@@ -296,7 +282,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 5px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -323,10 +308,12 @@ window#waybar {
 }
 #workspaces button {
   color: #ebdbb2;
+  border-radius: 0;
   transition: 0.3s;
 }
 #workspaces button:hover {
   background: transparent;
+  border-radius: 0;
   color: transparent;
 }
 #tray {
@@ -335,7 +322,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
@@ -350,7 +336,6 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 0px;
-  border-radius: 10px;
   transition: none;
   background: #1d2021;
   color: #ebdbb2;
