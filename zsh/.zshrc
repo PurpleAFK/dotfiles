@@ -77,6 +77,11 @@ alias tn="tmux new -s"
 alias ta="tmux attach -t"
 alias td="tmux detach"
 alias tk="tmux kill-session -t"
+
+# scripts
+alias t="$HOME/.config/scripts/fzf-tmux.sh"
+alias w="$HOME/.config/scripts/set-wall.sh"
+
 # clear
 alias cls="clear"
 # exit
@@ -85,7 +90,8 @@ alias e="exit"
 
 # Shell Integrations
 export PATH=$PATH:/home/purpleafk/.local/bin
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/new.omp.json)"
+export PATH=$PATH:/home/purpleafk/.cargo/bin
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pywal-theme.omp.json)"
 source $HOME/.config/scripts/fzf-git.sh
 source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(zoxide init zsh)"
