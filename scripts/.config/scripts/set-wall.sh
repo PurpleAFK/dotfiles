@@ -12,6 +12,11 @@ fi
 
 IMAGE_PATH="$1"
 
+# --- Configuration ---
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers" # Customize this to your wallpaper directory
+LAST_WALLPAPER_FILE="$HOME/.config/hypr/last_wallpaper.txt" # File to store the path of the last wallpaper
+
+
 # Check if the provided image path exists
 if [ ! -f "$IMAGE_PATH" ]; then
     echo "Error: Image file not found at '$IMAGE_PATH'"
@@ -36,6 +41,10 @@ if [ $? -ne 0 ]; then
     echo "Error: Failed to set wallpaper with hyprctl. Is hyprpaper running?"
     exit 1
 fi
+
+# --- Save the path of the newly set wallpaper ---
+echo "$IMAGE_PATH" > "$LAST_WALLPAPER_FILE"
+echo "Saved last wallpaper path to: $LAST_WALLPAPER_FILE"
 
 # --- Pywal and Kitty Theme Configuration ---
 # Pywal generates color schemes. The '-n' flag prevents Pywal from applying
@@ -62,8 +71,8 @@ if [ $? -ne 0 ]; then
     echo "Make sure you have 'include ~/.cache/wal/colors-kitty.conf' in your ~/.config/kitty/kitty.conf"
 fi
 
-#echo "Updating Hyprland border colors..."
-# ~/.config/scripts/hypr_colors.sh
+echo "Updating Hyprland border colors..."
+ ~/.config/scripts/hypr_colors.sh
 
 echo "Wallpaper, Kitty, Oh My Posh, and Hyprland borders updated successfully!"
 exit 0
