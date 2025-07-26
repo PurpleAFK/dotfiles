@@ -74,5 +74,25 @@ fi
 echo "Updating Hyprland border colors..."
  ~/.config/scripts/hypr_colors.sh
 
-echo "Wallpaper, Kitty, Oh My Posh, and Hyprland borders updated successfully!"
+# --- Waybar Reload/Restart ---
+echo "Reloading/Restarting Waybar to apply new colors..."
+
+# Check if Waybar is running
+if pgrep -x "waybar" > /dev/null; then
+    # If Waybar is running, attempt to gracefully reload its style
+    # This assumes 'reload_style_on_change' is true in Waybar config
+    # If it's not working consistently, you might need to restart it fully.
+    killall -SIGUSR2 waybar
+    echo "Sent SIGUSR2 to Waybar (attempting reload)."
+    sleep 1 # Give Waybar a moment to process the signal
+else
+    echo "Waybar is not running. Starting Waybar..."
+    # If Waybar is not running, start it
+    # You might need to adjust this command if your Waybar launch command is different
+    # For example, if you run it from a script or with specific arguments.
+    waybar & disown
+    echo "Started Waybar."
+fi
+
+echo "Wallpaper, Kitty, Oh My Posh, Waybar and Hyprland borders updated successfully!"
 exit 0
