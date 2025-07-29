@@ -80,7 +80,8 @@ alias tk="tmux kill-session -t"
 
 # scripts
 alias t="$HOME/.config/scripts/fzf-tmux.sh"
-alias w="$HOME/.config/scripts/set-wall.sh"
+alias sw="$HOME/.config/scripts/set-wall.sh"
+alias w="$HOME/.config/scripts/wallpaper-chooser.sh"
 
 # clear
 alias cls="clear"
