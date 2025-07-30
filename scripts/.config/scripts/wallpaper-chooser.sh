@@ -16,7 +16,7 @@ fi
 selected_filename=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) \
     | sort -V \
     | sed "s|^$WALLPAPER_DIR||" \
-    | rofi -dmenu -i -p "Select Wallpaper:")
+    | rofi -dmenu -i -p "Select Wallpaper:" )
 
 # Check if a wallpaper was selected (Rofi returns empty string if cancelled)
 if [ -n "$selected_filename" ]; then

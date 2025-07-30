@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Path to the FIFO (Named Pipe) that cava will write to
+CAVA_FIFO="/tmp/cava_waybar_fifo"
+
+# --- Cleanup function ---
+# This function is called when the script exits or is terminated
+cleanup() {
+    echo "[cava.sh] Cleaning up..." >&2
+    # Kill any cava processes that this script might have started
+    # We use pgrep to find processes named 'cava' and kill them
+    pkill -TERM -f "cava > $CAVA_FIFO" 2>/dev/null
+    # Give it a moment to terminate gracefully
+    sleep 0.1
+    # Remove the FIFO file if it exists
+    if [[ -p "$CAVA_FIFO" ]]; then
+        rm -f "$CAVA_FIFO"
+        echo "[cava.sh] Removed FIFO: $CAVA_FIFO" >&2
+    fi
+    echo "[cava.sh] Script exited." >&2
+}
+
+# --- Trap signals for graceful exit ---
+# When the script receives these signals, call the cleanup function
+trap cleanup SIGHUP SIGINT SIGTERM EXIT
+
+# --- Ensure a clean start: kill any lingering cava processes ---
+# This helps prevent conflicts if a previous cava instance didn't shut down cleanly
+echo "[cava.sh] Killing any existing cava processes..." >&2
+pkill -TERM -f "cava > $CAVA_FIFO" 2>/dev/null
+sleep 0.5 # Give old processes time to die
+
+# --- Create (or recreate) the FIFO ---
+# If the FIFO exists from a previous run, remove it first
+if [[ -p "$CAVA_FIFO" ]]; then
+    echo "[cava.sh] FIFO already exists. Removing for clean start." >&2
+    rm -f "$CAVA_FIFO"
+fi
+
+# Create the named pipe (FIFO)
+mkfifo "$CAVA_FIFO" || { echo "[cava.sh] ERROR: Failed to create FIFO. Exiting." >&2; exit 1; }
+echo "[cava.sh] FIFO created: $CAVA_FIFO" >&2
+
+# --- Start cava in the background ---
+# cava must be configured to write to this FIFO in ~/.config/cava/config
+echo "[cava.sh] Starting cava process in background..." >&2
+cava > "$CAVA_FIFO" 2>/dev/null &
+CAVA_PID=$! # Store the PID of the background cava process
+echo "[cava.sh] Cava PID: $CAVA_PID" >&2
+
+# Give cava a moment to start and write to the FIFO
+sleep 0.5
+
+# --- Read from the FIFO and output to stdout (for Waybar) ---
+echo "[cava.sh] Reading from FIFO and piping to Waybar..." >&2
+# The 'while read' loop will continuously read new lines from the FIFO
+# and print them to standard output, which Waybar will then consume.
+while IFS= read -r line; do
+    echo "$line"
+done < "$CAVA_FIFO"
+
+# If the loop finishes (e.g., cava crashed or FIFO was closed), cleanup
+echo "[cava.sh] FIFO read loop ended. Initiating final cleanup." >&2
+cleanup # Calls the cleanup function

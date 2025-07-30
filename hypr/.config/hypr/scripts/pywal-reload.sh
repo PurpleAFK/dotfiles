@@ -35,8 +35,8 @@ kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf
 
 # Hyprland Border Colors
 # Apply active and inactive border colors from pywal
-hyprctl keyword general:col.active_border "rgb($color1)"
-hyprctl keyword general:col.inactive_border "rgb($color0)"
+# hyprctl keyword general:col.active_border "rgb($color1)"
+# hyprctl keyword general:col.inactive_border "rgb($color0)"
 hyprctl keyword decoration:active_opacity 1.0
 hyprctl keyword decoration:inactive_opacity 0.9
 
