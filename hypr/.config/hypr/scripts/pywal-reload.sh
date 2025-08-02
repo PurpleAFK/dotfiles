@@ -14,7 +14,7 @@ fi
 # Pywalfox
 # Requires 'pywalfox update' to be installed and in your PATH
 # This updates browser themes. Remove if not using pywalfox.
-# pywalfox update &>/dev/null
+pywalfox update &>/dev/null
 
 # Wal_tpl for GTK/Qt/Other templates
 # Requires 'wal_tpl' to be installed (e.g., pip install wal_tpl)
@@ -27,7 +27,13 @@ fi
 
 # Waybar
 # Reload Waybar to apply new colors
-killall -SIGUSR2 waybar
+# killall -SIGUSR2 waybar
+
+if pgrep -x "waybar" > /dev/null; then
+    killall -SIGUSR2 waybar # Reload existing Waybar
+else
+    waybar & disown # Start Waybar if it's not running
+fi
 
 # Kitty
 # Send IPC command to Kitty to reload colors
@@ -40,17 +46,17 @@ kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf
 hyprctl keyword decoration:active_opacity 1.0
 hyprctl keyword decoration:inactive_opacity 0.9
 
-# hyprctl keyword general:col.active_border "rgba(${color1#\#}ff)"
-# hyprctl keyword general:col.inactive_border "rgba(${color0#\#}aa)"
-
 # You might have other Hyprland elements to update here
 # e.g., if you use Pyprland, specific window rules, etc.
 # Narsell has a specific pyprland setup.
 
+# Generate Hyprlock colors file
+~/.config/hypr/scripts/hyprlock-pywal-colors.sh
+
 # Zathura
 # Notifies Zathura to reload its config/colors
 # (Requires Zathura to be running)
-pkill -USR1 zathura
+# pkill -USR1 zathura
 
 # EWW (if you use it)
 # Narsell uses EWW widgets, which would also be themed by Pywal.
