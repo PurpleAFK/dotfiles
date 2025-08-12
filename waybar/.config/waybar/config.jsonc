@@ -17,7 +17,7 @@
         // "hyprland/window"
     ],
     "modules-center": [
-        
+        "custom/playerctl",
     ],
     "modules-right": [
         "tray",
@@ -33,6 +33,22 @@
     ],
 
     // --- Module Configurations ---
+
+
+  "custom/playerctl": {
+    "format": "<span>{}</span>",
+    "return-type": "json",
+    "max-length": 50,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click-middle": "playerctl previous",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "scroll-step": 5.0,
+    "on-scroll-up": "$HOME/.config/hypr/scripts/volume.sh --inc",
+    "on-scroll-down": "$HOME/.config/hypr/scripts/volume.sh --dec",
+    "smooth-scrolling-threshold": 1
+  },
+
 
     "custom/launcher": {
         "format": "󰣇 ",
@@ -97,7 +113,7 @@
         "format": "{icon} {capacity}%",
         "format-full": "{icon} {capacity}%",
         "format-plugged": " {capacity}%",
-        "format-charging": "充電 {capacity}%", 
+        "format-charging": " {capacity}%", 
         "format-alt": "{icon} {time}",
         "format-icons": ["", "", "", "", ""],
         "tooltip-format": "{time}",
@@ -191,5 +207,6 @@
         "format": "", 
         "tooltip": false,
         "on-click": "$HOME/.config/waybar/scripts/power_menu.sh" /* Command to open your wlogout menu */
-    }
+    } 
+
 }

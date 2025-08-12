@@ -2,7 +2,7 @@
 @import "/home/purpleafk/.cache/wal/colors-waybar.css"; /* This line connects to Pywal */
 
 * {
-  font-family: "JetBrainsMono Nerd Font", "Noto Sans CJK JP";
+  font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP";
   font-size: 15px;
   font-weight: bold;
   background-color: transparent;
@@ -134,4 +134,18 @@ window#waybar {
 
 #custom-cava_mviz {
   color: @foreground;
+}
+
+#custom-playerctl {
+  padding: 0 10px;
+}
+
+/* Style for when music is playing */
+#custom-playerctl.Playing {
+  color: @foreground;
+}
+
+/* Style for when music is paused */
+#custom-playerctl.Paused {
+  color: @color2;
 }
