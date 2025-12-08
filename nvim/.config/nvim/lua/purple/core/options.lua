@@ -6,8 +6,10 @@ opt.relativenumber = true
 opt.number = true
 
 -- to remove the ~ sign
-vim.opt.fillchars:append { eob = " " }
+vim.opt.fillchars:append({ eob = " " })
 
+-- conceallevel for obsidian.nvim
+vim.opt.conceallevel = 1
 
 -- tabs and indentation
 opt.tabstop = 2
@@ -27,7 +29,6 @@ opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
 
-
 --backspace
 opt.backspace = "indent,eol,start"
 
@@ -37,4 +38,3 @@ opt.clipboard:append("unnamedplus")
 --split windows
 opt.splitright = true
 opt.splitbelow = true
-

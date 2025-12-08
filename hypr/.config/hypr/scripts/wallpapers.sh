@@ -3,7 +3,7 @@
 # wallpapers.sh
 # Sets wallpaper with swww, generates Pywal colors, and reloads applications.
 
-WALLPAPER_DIR="$HOME/.local/share/wallpapers"
+WALLPAPER_DIR="$HOME/.local/share/wallpapers/"
 LAST_WALLPAPER_FILE="$HOME/.config/hypr/last_wallpaper.txt"
 PYWAL_RELOAD_SCRIPT="$HOME/.config/hypr/scripts/pywal-reload.sh"
 

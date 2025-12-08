@@ -73,7 +73,7 @@ window#waybar {
 }
 
 #custom-power {
-  color: @color4;
+  color: @color2;
   background-color: @background;
   margin: 5px;
   padding: 0 13 0 10px;
@@ -107,20 +107,20 @@ window#waybar {
 }
 
 #backlight {
-  color: @color4;
+  color: @color3;
   background-color: @background;
   margin: 5px;
   padding: 0 10px;
 }
 
 #memory {
-  color: @color5;
+  color: @color3;
   margin: 5px;
   padding: 0 10px;
 }
 
 #cpu {
-  color: @color5;
+  color: @color3;
   margin: -5px;
 }
 
