@@ -3,6 +3,8 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 keymap.set("i", "kj", "<ESC>l", { desc = "Exit insert mode with kj" })
+keymap.set("i", "<C-h>", "<C-w>", { desc = "Delete previous word (Ctrl+Backspace/C-h)" })
+keymap.set("i", "<C-BS>", "<C-w>", { desc = "Delete previous word (Ctrl+Backspace/C-BS)" })
 vim.keymap.set("n", "<leader>cl", ":nohl<CR>", { desc = "Clear seach highlights" })
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save the file" })
 vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit without saving" })
