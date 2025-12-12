@@ -1,3 +1,64 @@
-@import '../../.cache/wal/colors-waybar.css';
-@import 'themes/nova-dark/notifications.css';
-@import 'themes/nova-dark/central_control.css';
+@import "/home/purpleafk/.cache/wal/colors-waybar.css";
+
+/* --- Global Notification Popups (.notification) --- */
+
+.notification-row {
+  margin: 8px;
+}
+
+.notification {
+  background-color: @color4;
+  border: 2px solid @color1;
+  border-radius: 0; /* <<< REMOVED ROUNDED CORNERS */
+  padding: 10px;
+  margin: 5px;
+}
+
+/* 2. Text and Content (No changes needed here) */
+
+.notification-title {
+  font-weight: bold;
+  color: @background;
+  margin-bottom: 5px;
+}
+
+.notification-body {
+  color: @color7;
+}
+
+.notification-icon {
+  border-radius: 0; /* <<< ENSURE ICON BORDERS ARE ALSO SQUARE */
+}
+
+/* 3. Urgency Levels (Critical/Warning) */
+.notification.critical {
+  background-color: @color1;
+  border-color: @color1;
+  color: @foreground;
+}
+
+.notification.critical .notification-title,
+.notification.critical .notification-body {
+  color: @foreground;
+}
+
+/* 4. Notification Center (History Window) */
+
+#notification-center {
+  background-color: black;
+  border: 2px solid @color1;
+  border-radius: 0; /* <<< REMOVED ROUNDED CORNERS */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.control-center-button {
+  background-color: @color4;
+  color: @background;
+  border-radius: 0; /* <<< REMOVED ROUNDED CORNERS */
+  padding: 4px 8px;
+  margin: 5px;
+}
+
+.control-center-button:hover {
+  background-color: @color5;
+}

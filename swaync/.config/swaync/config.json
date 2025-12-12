@@ -1,53 +1,39 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-  "positionX": "right",
-  "positionY": "top",
-	"cssPriority": "user",
 
-  "control-center-width": 380,
-  "control-center-height": 860, 
-  "control-center-margin-top": 2,
-  "control-center-margin-bottom": 2,
-  "control-center-margin-right": 1,
-  "control-center-margin-left": 0,
+  /* --- ANCHORING & POSITIONING (CORRECTED) --- */
+  "anchor": "top-right",
+  "control-center-anchor": "top-right",
 
-  "notification-window-width": 400,
+  /* ALIGNMENT WITH HYPRLAND GAPS (gaps_out = 15) */
+  /* Set margin-right to match your Hyprland outer gap */
+  "control-center-margin-right": 15,
+  /* Set top margin to ensure it sits below your Waybar (adjust 50 if needed) */
+  "control-center-margin-top": 15,
+
+  /* Notification Popups Margin (Controls distance from the screen edge) */
   "notification-icon-size": 48,
-  "notification-body-image-height": 160,
-  "notification-body-image-width": 200,
+  "notification-window-width": 350,
+  "notification-window-margin-right": 15,
+  "notification-window-margin-top": 5,
 
+  /* --- SIZING & TIMING (MINIMAL) --- */
+  "control-center-width": 380,
+  "control-center-height": 860 /* Keep your height */,
   "timeout": 4,
   "timeout-low": 2,
   "timeout-critical": 6,
-  
-  "fit-to-screen": false,
-  "keyboard-shortcuts": true,
-  "image-visibility": "when-available",
   "transition-time": 200,
-  "hide-on-clear": false,
-  "hide-on-action": false,
-  "script-fail-notify": true,
-  "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
-    }
-  },
-  "notification-visibility": {
-    "example-name": {
-      "state": "muted",
-      "urgency": "Low",
-      "app-name": "Spotify"
-    }
-  },
-  "widgets": [
-    "label",
-    "buttons-grid",
-    "mpris",
-    "title",
-    "dnd",
-    "notifications"
-  ],
+
+  /* --- FEATURE VISIBILITY (MINIMAL) --- */
+  "image-visibility": "when-available",
+  "keyboard-shortcuts": true,
+  "cssPriority": "user",
+
+  /* --- WIDGETS (MINIMAL & ESSENTIAL) --- */
+  "widgets": ["title", "dnd", "buttons-grid", "mpris", "notifications"],
+
+  /* --- WIDGET CONFIGURATION --- */
   "widget-config": {
     "title": {
       "text": "Notifications",
@@ -57,42 +43,18 @@
     "dnd": {
       "text": "Do not disturb"
     },
-    "label": {
-      "max-lines": 1,
-      "text": " "
-    },
-    "mpris": {
-      "image-size": 96,
-      "image-radius": 12
-    },
-    "volume": {
-      "label": "󰕾",
-        "show-per-app": true
-    },
     "buttons-grid": {
       "actions": [
-        {
-          "label": " ",
-          "command": "amixer set Master toggle"
-        },
-        {
-          "label": "",
-          "command": "amixer set Capture toggle"
-        },
-        {
-          "label": " ",
-          "command": "nm-connection-editor"
-        },
-        {
-          "label": "󰂯",
-          "command": "blueman-manager"
-        },
-        {
-          "label": "󰏘",
-          "command": "nwg-look"
-        }
-        
+        { "label": " ", "command": "amixer set Master toggle" },
+        { "label": "", "command": "amixer set Capture toggle" },
+        { "label": " ", "command": "nm-connection-editor" },
+        { "label": "󰂯", "command": "blueman-manager" },
+        { "label": "󰏘", "command": "nwg-look" }
       ]
+    },
+    "mpris": {
+      /* Remove rounded corners from media player image */
+      "image-radius": 0
     }
   }
 }
