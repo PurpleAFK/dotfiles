@@ -120,7 +120,10 @@ alias cfp="g++ -std=c++17 -Wall -Wextra solution.cpp -o solution" # for compilin
 # advent-of-code
 
 AOC="~/Documents/advent-of-code/"
-AOC_COOKIE="53616c7465645f5fba2f28abb16822925bee86e78617ea5fe977759fdd47b5a52b4bca4ec9a98947a33e9a3a60e1a82d1109d174ee4ac72def3e931921bfcafe" # get this from the cookies tab in network tools on the AOC website
+# get this from the cookies tab in network tools on the AOC website
+if [[ -f ~/.aoc-cookie ]]; then
+    export AOC_COOKIE=$(cat ~/.aoc-cookie)
+fi
 
 alias aos="cd $AOC && g++ -std=c++17 -Wall -Wextra solution.cpp -o solution && ./solution < in.txt"
 alias aot="cd $AOC && g++ -std=c++17 -Wall -Wextra solution.cpp -o solution && echo -ne '\\e[0;34m' && ./solution < test.txt; echo -ne '\\e[0m'"
