@@ -18,8 +18,8 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+bindkey -v
+bindkey '^F' forward-word
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -110,12 +110,13 @@ alias cls="clear"
 # exit
 alias e="exit"
 
+# codeforces
+alias ft="python3 fetch_tests.py"
+alias rt="python3 run_tests.py"
 
 # running code
-alias cfs="g++ -std=c++17 -Wall -Wextra solution.cpp -o solution && ./solution < in.txt"
-alias cft="g++ -std=c++17 -Wall -Wextra solution.cpp -o solution && echo -ne '\\e[0;34m' && ./solution < test.txt; echo -ne '\\e[0m'"
-alias cfc="cft; echo; cfs"
-alias cfp="g++ -std=c++17 -Wall -Wextra solution.cpp -o solution" # for compiling only
+alias cs="g++ -std=c++17 -Wall -Wextra solution.cpp -o solution && ./solution < in.txt"
+alias com="g++ -std=c++17 -Wall -Wextra solution.cpp -o solution" # for compiling only
 
 # advent-of-code
 

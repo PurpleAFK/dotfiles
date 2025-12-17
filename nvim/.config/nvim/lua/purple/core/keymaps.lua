@@ -25,5 +25,144 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
+-- obsidian.nvim
+vim.keymap.set("n", "<leader>np", function()
+	-- Ensure obsidian is loaded
+	require("obsidian")
+
+	local title = vim.fn.input("Note title: ")
+	if title == "" or title == nil then
+		print(" Note creation cancelled")
+		return
+	end
+
+	vim.cmd("ObsidianNew permanent/" .. title)
+
+	vim.defer_fn(function()
+		local lines = {
+			"---",
+			"title: " .. title,
+			"created: " .. os.date("%a-%d-%m-%Y %H:%M"),
+			"tags:",
+			"  - permanent",
+			"type: permanent",
+			"---",
+			"# " .. title,
+			"",
+			"## Main Idea",
+			"",
+			"## Elaboration",
+			"",
+			"## Connections",
+			"",
+			"## References",
+			"---",
+		}
+		vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+		vim.api.nvim_win_set_cursor(0, { 10, 0 })
+	end, 100)
+end, { desc = "New Zettelkasten note" })
+
+vim.keymap.set("n", "<leader>nr", function()
+	require("obsidian")
+
+	local title = vim.fn.input("Note title: ")
+	if title == "" or title == nil then
+		print(" Note creation cancelled")
+		return
+	end
+
+	vim.cmd("ObsidianNew resources/" .. title)
+
+	vim.defer_fn(function()
+		local lines = {
+			"---",
+			"title: " .. title,
+			"created: " .. os.date("%a-%d-%m-%Y %H:%M"),
+			"tags:",
+			"  - ",
+			"type: resource",
+			"---",
+			"# " .. title,
+			"",
+			"## Source Information",
+			"",
+			"## Related Permanent Notes",
+			"",
+			"---",
+		}
+		vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+		vim.api.nvim_win_set_cursor(0, { 10, 0 })
+	end, 100)
+end, { desc = "New Resource note" })
+
+vim.keymap.set("n", "<leader>nf", function()
+	require("obsidian")
+
+	local title = vim.fn.input("Note title: ")
+	if title == "" or title == nil then
+		print(" Note creation cancelled")
+		return
+	end
+
+	vim.cmd("ObsidianNew inbox/" .. title)
+
+	vim.defer_fn(function()
+		local lines = {
+			"---",
+			"title: " .. title,
+			"created: " .. os.date("%a-%d-%m-%Y %H:%M"),
+			"tags:",
+			"  - ",
+			"type: fleeting",
+			"---",
+			"# " .. title,
+			"",
+			"## Quick Capture",
+			"",
+			"---",
+			"**Process by:**",
+		}
+		vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+		vim.api.nvim_win_set_cursor(0, { 10, 0 })
+	end, 100)
+end, { desc = "New Fleeting note" })
+
+-- Daily note keybind
+vim.keymap.set("n", "<leader>nd", function()
+	require("obsidian")
+
+	local date = os.date("%a-%d-%m-%Y")
+	local filename = os.date("%Y-%m-%d")
+
+	vim.cmd("ObsidianNew daily/" .. filename)
+
+	vim.defer_fn(function()
+		local lines = {
+			"---",
+			"date: " .. date,
+			"tags:",
+			"  - daily",
+			"type: daily",
+			"---",
+			"",
+			"# " .. date,
+			"",
+			"## Tasks",
+			"- [ ] ",
+			"",
+			"## Notes",
+			"",
+			"",
+			"## Reflections",
+			"",
+			"",
+			"---",
+		}
+		vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+		vim.api.nvim_win_set_cursor(0, { 11, 6 }) -- Cursor after first task checkbox
+	end, 100)
+end, { desc = "Open today's daily note" })
+
 -- todofloat
 vim.keymap.set("n", "<leader>td", ":Td<CR>", { desc = "Open the floating todo list" })
