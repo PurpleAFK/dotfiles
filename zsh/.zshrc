@@ -18,8 +18,9 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-bindkey -v
-bindkey '^F' forward-word
+export EDITOR=nvim
+bindkey -e
+# bindkey '^F' forward-word
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -58,7 +59,6 @@ export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | 
 export FZF_TMUX_OPTS=" -p90%,70% " 
 
 # functions
-cpp() { g++ "$1" && ./a.out; }
 
 tf() {
   if [ -z "$1" ]; then
@@ -81,6 +81,7 @@ alias glog='git log --oneline --graph --all'
 # yazi
 alias y="yazi"
 # nvim
+alias vim="nvim"
 alias nv="nvim"
 alias fu="fd --type f --hidden --exclude .git | fzf-tmux -p --reverse| xargs nvim"
 # tmux
@@ -154,3 +155,6 @@ source $HOME/.config/scripts/fzf-git.sh
 source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
+
+# CP ALIASES
+[ -f /home/purpleafk/Documents/competitive-programming/cp_aliases.sh ] && source /home/purpleafk/Documents/competitive-programming/cp_aliases.sh

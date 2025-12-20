@@ -25,9 +25,9 @@ pywalfox update &>/dev/null
 # Reload Dunst to apply new colors
 # pkill dunst && dunst & disown
 
-# Waybar
-# Reload Waybar to apply new colors
-# killall -SIGUSR2 waybar
+# Swaync
+# Reload Swaync to apply new colors
+killall -SIGUSR2 swaync
 
 if pgrep -x "waybar" > /dev/null; then
     killall -SIGUSR2 waybar # Reload existing Waybar
