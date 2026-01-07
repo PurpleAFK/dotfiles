@@ -145,6 +145,7 @@ function aoc-load () {
     fi
 }
 
+
 # Shell Integrations
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
@@ -156,5 +157,26 @@ source /home/purpleafk/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 
-# CP ALIASES
-[ -f /home/purpleafk/Documents/competitive-programming/cp_aliases.sh ] && source /home/purpleafk/Documents/competitive-programming/cp_aliases.sh
+
+# CODEFORCES_CP_SETUP
+export SCRIPT_DIR="/home/purpleafk/cp/scripts"
+source "$SCRIPT_DIR/cp_aliases.sh"
+
+# Zettelkasten Notes Aliases
+alias n='cd ~/notes && nvim'
+alias nd='~/notes/scripts/new-daily.sh'
+alias ni='~/notes/scripts/new-inbox.sh'
+alias np='~/notes/scripts/new-permanent.sh'
+alias nr='~/notes/scripts/new-resource.sh'
+alias ntoday='~/notes/scripts/new-daily.sh'
+
+# Quick navigation
+alias ndaily='cd ~/notes/daily && nvim'
+alias ninbox='cd ~/notes/inbox && nvim'
+alias nperm='cd ~/notes/permanent && nvim'
+alias nres='cd ~/notes/resources && nvim'
+
+# Search
+alias nf='cd ~/notes && nvim -c "ObsidianQuickSwitch"'
+alias ns='cd ~/notes && rg --type md'
+
