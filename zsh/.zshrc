@@ -161,6 +161,8 @@ source <(fzf --zsh)
 # CODEFORCES_CP_SETUP
 export SCRIPT_DIR="/home/purpleafk/cp/scripts"
 source "$SCRIPT_DIR/cp_aliases.sh"
+# export CONTEST_SCRIPTS_DIR="/home/purpleafk/contests/scripts"
+# source "$CONTEST_SCRIPTS_DIR/aliases.sh"
 
 # Zettelkasten Notes Aliases
 alias n='cd ~/notes && nvim'

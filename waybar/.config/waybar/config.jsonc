@@ -13,12 +13,12 @@
     "modules-left": [
         // "custom/launcher",
         "clock",
-        "hyprland/workspaces",
+        "hyprland/workspaces"
         // "hyprland/window",
-        "custom/cava_mviz",
+        // "custom/cava_mviz",
     ],
     "modules-center": [
-        "custom/playerctl",
+        "custom/playerctl"
     ],
     "modules-right": [
         "tray",
@@ -57,6 +57,25 @@
     },
 
     "hyprland/workspaces": {
+        // "format": "<span size='larger'>{icon}</span>",
+        // "on-click": "activate",
+        // "format-icons": {
+        //     "1": "一",
+        //     "2": "二",
+        //     "3": "三",
+        //     "4": "四",
+        //     "5": "五",
+        //     "default": "\uf4c3"
+        // },
+        // "icon-size": 10,
+        // "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五"
+        },
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
@@ -154,7 +173,8 @@
     },
 
     "clock": {
-        "format": " {:%I:%M %p}"
+        // "format": " {:%I:%M %p}"
+        "format": " {:%d.%m.%Y | %H:%M}"
     },
 
     "disk": {
