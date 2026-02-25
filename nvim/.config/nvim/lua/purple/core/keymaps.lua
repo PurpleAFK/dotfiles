@@ -25,6 +25,28 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
+-- contests
+vim.keymap.set("n", "<leader>t", function()
+	vim.cmd("write")
+	if test_buf and vim.api.nvim_buf_is_valid(test_buf) then
+		vim.api.nvim_buf_delete(test_buf, { force = true })
+	end
+	vim.cmd("vsplit | terminal " .. vim.fn.expand("$HOME") .. "/contests/scripts/cptest")
+	vim.cmd("vertical resize 50")
+	test_buf = vim.api.nvim_get_current_buf()
+	vim.cmd("startinsert")
+end)
+
+vim.keymap.set("n", "<leader>s", "<cmd>%y+<cr>", { desc = "Copy to clipboard" })
+
+-- Quick close the terminal pane: press q in normal mode
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		local opts = { buffer = true, silent = true }
+		vim.keymap.set("n", "q", "<cmd>bd!<cr>", opts)
+	end,
+})
+
 -- obsidian.nvim
 vim.keymap.set("n", "<leader>np", function()
 	-- Ensure obsidian is loaded

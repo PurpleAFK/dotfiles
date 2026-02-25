@@ -17,9 +17,7 @@ window {
     x-offset:                     0px;
     y-offset:                     0px;
     enabled:                      true;
-    border:                       2px;
     border-radius:                0px;
-    border-color:                 @foreground;
     background-color:             @background;
     cursor:                       "default";
 }
