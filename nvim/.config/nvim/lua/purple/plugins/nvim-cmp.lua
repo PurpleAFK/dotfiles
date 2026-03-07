@@ -23,6 +23,16 @@ return {
 
 		-- Load custom snippets for C++
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
+
+		-- Load snippets for latex
+		require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/lua/purple/snippets" } })
+
+		require("luasnip").config.set_config({
+			history = true,
+			updateevents = "TextChanged,TextChangedI",
+			enable_autosnippets = true, -- CRITICAL: Enable this
+		})
+
 		cmp.setup({
 			completion = {
 				completeopt = "menu,menuone,preview,noselect",

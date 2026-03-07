@@ -18,6 +18,8 @@ return {
 
 		local keymap = vim.keymap -- for conciseness
 
+		local capabilities = cmp_nvim_lsp.default_capabilities()
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
@@ -78,20 +80,62 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		-- vim.lsp.config("lua_ls", {
+		-- 	settings = {
+		-- 		Lua = {
+		-- 			runtime = {
+		-- 				version = "LuaJIT",
+		-- 			},
+		-- 			diagnostics = {
+		-- 				globals = {
+		-- 					"vim",
+		-- 					"require",
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
+		--
+		vim.lsp.config("texlab", {
+			install = true, -- Optional: tells nvim to manage it if possible
+			capabilities = capabilities,
+			settings = {
+				texlab = {
+					build = {
+						executable = "latexmk",
+						args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+						onSave = true,
+					},
+					forwardSearch = {
+						executable = "zathura",
+						args = { "--synctex-forward", "%l:1:%f", "%p" },
+					},
+					chktex = { onOpenAndSave = true },
+				},
+			},
+		})
+
+		-- 2. Configure Lua_ls (Native 0.11 style)
 		vim.lsp.config("lua_ls", {
+			capabilities = capabilities,
 			settings = {
 				Lua = {
-					runtime = {
-						version = "LuaJIT",
-					},
+					runtime = { version = "LuaJIT" },
 					diagnostics = {
-						globals = {
-							"vim",
-							"require",
-						},
+						globals = { "vim", "require" },
 					},
 				},
 			},
 		})
+
+		-- 3. Configure clangd for C++
+		vim.lsp.config("clangd", {
+			capabilities = capabilities,
+		})
+
+		-- IMPORTANT: You must tell Neovim to actually start these configs for the current buffer
+		vim.lsp.enable("texlab")
+		vim.lsp.enable("lua_ls")
+		vim.lsp.enable("clangd")
 	end,
 }

@@ -6,17 +6,21 @@ return {
 		"windwp/nvim-ts-autotag",
 	},
 	config = function()
-		local treesitter = require("nvim-treesitter.configs")
+		-- Use pcall to avoid the 'module not found' crash during installation
+		local status, treesitter = pcall(require, "nvim-treesitter.configs")
+		if not status then
+			return
+		end
 
-		-- configure treesitter
-		treesitter.setup({ -- enable syntax highlighting
+		treesitter.setup({
 			highlight = {
 				enable = true,
+				-- IMPORTANT: Disable treesitter for latex to let VimTeX handle it
+				-- Treesitter latex highlighting is known to break VimTeX features
+				disable = { "latex" },
 			},
 			indent = { enable = true },
-			autotag = {
-				enable = true,
-			},
+			autotag = { enable = true },
 			ensure_installed = {
 				"json",
 				"javascript",
@@ -24,20 +28,16 @@ return {
 				"yaml",
 				"html",
 				"css",
-				"prisma",
 				"markdown",
 				"markdown_inline",
-				"svelte",
-				"graphql",
 				"bash",
 				"lua",
 				"c",
 				"cpp",
 				"vim",
-				"dockerfile",
-				"gitignore",
 				"query",
 				"vimdoc",
+				"latex", -- Add latex here for better indentation/folding
 			},
 			incremental_selection = {
 				enable = true,

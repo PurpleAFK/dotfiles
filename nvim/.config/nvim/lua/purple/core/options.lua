@@ -40,3 +40,6 @@ opt.clipboard:append("unnamedplus")
 --split windows
 opt.splitright = true
 opt.splitbelow = true
+
+--autocomplete
+vim.opt.completeopt = "menu,menuone,noselect"
