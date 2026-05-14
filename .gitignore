@@ -1,0 +1,5 @@
+# Ignore all binaries in bin/
+bin/.local/bin/*
+# But allow your custom shell scripts
+!bin/.local/bin/*.sh
+!bin/.local/bin/aider-install
