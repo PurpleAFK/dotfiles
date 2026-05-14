@@ -1,9 +1,9 @@
 return {
 	remapped_kb = {
 		-- Add any playing remaps here
-		["v"] = "F3", -- example
+		["MB4"] = "F3", -- example
+		-- ["V"] = "F3",
 		["capslock"] = "backspace",
-		["V"] = "F3",
 	},
 
 	normal_kb = {

@@ -25,5 +25,5 @@ xkb_symbols "basic" {
     key <AB03> { [ n, n ] }; // c > n
     // key <AB04> { [ Armenian_za, Armenian_ZA ] }; // v > զ
 
-    // key <LALT> { [ n, n ] }; // alt > n
+    //key <LALT> { [ Enter, Enter ] }; // alt > n
 };

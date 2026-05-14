@@ -496,7 +496,12 @@ config.actions = {
 
 	[cfg.toggle_ninbot_key] = function()
 		if not is_ninb_running() then
-			waywall.exec("java -Dawt.useSystemAAFontSettings=on -jar " .. nb_path)
+			-- Use the nb_path variable defined on line 18
+			-- Added MetalLookAndFeel and non-reparenting flags for Fedora/Wayland stability
+			waywall.exec(
+				"env _JAVA_AWT_WM_NONREPARENTING=1 java -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -jar "
+					.. nb_path
+			)
 			waywall.show_floating(true)
 		else
 			helpers.toggle_floating()
@@ -536,6 +541,10 @@ config.actions = {
 				waywall.set_keymap({ layout = cfg.remaps_config.layout_name })
 			end
 		end
+	end,
+
+	["Ctrl-Shift-N"] = function()
+		waywall.exec("java -jar ~/Documents/Games/Minecraft/Ninjabrain-Bot-1.5.1.jar")
 	end,
 }
 
