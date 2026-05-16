@@ -37,7 +37,12 @@ fi
 
 # Kitty
 # Send IPC command to Kitty to reload colors
-kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf
+# kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf
+
+# Kitty — only attempt if a Kitty socket is available
+if pgrep -x "kitty" > /dev/null; then
+    kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf 2>/dev/null || true
+fi
 
 # Hyprland Border Colors
 # Apply active and inactive border colors from pywal
@@ -51,7 +56,13 @@ hyprctl keyword decoration:inactive_opacity 0.9
 # Narsell has a specific pyprland setup.
 
 # Generate Hyprlock colors file
-~/.config/hypr/scripts/hyprlock-pywal-colors.sh
+# Hyprlock — only run if the script exists
+HYPRLOCK_SCRIPT="$HOME/.config/hypr/scripts/hyprlock-pywal-colors.sh"
+if [ -f "$HYPRLOCK_SCRIPT" ]; then
+    bash "$HYPRLOCK_SCRIPT"
+else
+    echo "Warning: hyprlock-pywal-colors.sh not found, skipping." >&2
+fi
 
 # Zathura
 # Notifies Zathura to reload its config/colors
@@ -68,6 +79,20 @@ hyprctl keyword decoration:inactive_opacity 0.9
 # This usually involves reloading VSCode or restarting it.
 # Check Narsell's specific VSCode setup.
 # code --reload-windows &>/dev/null # Example
+
+
+# Apply KDE color scheme — install it first, then apply by name
+KDE_COLORS_DIR="$HOME/.local/share/color-schemes"
+mkdir -p "$KDE_COLORS_DIR"
+cp ~/.cache/wal/colors-kde.colors "$KDE_COLORS_DIR/Pywal.colors"
+plasma-apply-colorscheme Pywal 2>/dev/null || true
+
+# Dolphin
+if pgrep -x "dolphin" > /dev/null; then
+    pkill -x dolphin
+    sleep 1.5
+    QT_QPA_PLATFORM=wayland XDG_CURRENT_DESKTOP=KDE dolphin & disown
+fi
 
 echo "Pywal theme applied to applications."
 exit 0
