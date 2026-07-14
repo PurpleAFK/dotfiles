@@ -43,3 +43,22 @@ opt.splitbelow = true
 
 --autocomplete
 vim.opt.completeopt = "menu,menuone,noselect"
+
+--obsidian
+vim.opt.autoread = true
+vim.opt.updatetime = 500
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+	pattern = "*",
+	callback = function()
+		if vim.fn.mode() ~= "c" then
+			vim.cmd("checktime")
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+	callback = function()
+		vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+	end,
+})

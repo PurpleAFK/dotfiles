@@ -36,5 +36,16 @@ return {
 		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+		vim.keymap.set("n", "<leader>vf", function()
+			require("telescope.builtin").find_files({ cwd = "~/convergence", hidden = false })
+		end, { desc = "Vault: files" })
+
+		vim.keymap.set("n", "<leader>vg", function()
+			require("telescope.builtin").live_grep({ cwd = "~/convergence" })
+		end, { desc = "Vault: grep" })
+
+		vim.keymap.set("n", "<leader>vt", function()
+			require("telescope.builtin").tags({ cwd = "~/convergence" })
+		end, { desc = "Vault: tags" })
 	end,
 }
