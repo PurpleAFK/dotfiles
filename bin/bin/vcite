@@ -15,5 +15,5 @@ KEY=$(awk '
 ' "$BIB" | fzf --with-nth=2 --delimiter='\t' --preview 'echo {1}' | cut -f1)
 
 [ -z "$KEY" ] && exit 0
-printf '[@%s]' "$KEY" | wl-copy
+printf "$KEY" | wl-copy
 echo "Copied: [@$KEY]"
