@@ -16,6 +16,11 @@ return {
 		"onsails/lspkind.nvim",
 	},
 	config = function()
+		-- Remove Neovim's built-in 0.11+ default Tab/S-Tab mappings
+		-- (vim.snippet.jump) BEFORE cmp sets its own, so cmp's mapping
+		-- is the one left active.
+		pcall(vim.keymap.del, { "i", "s" }, "<Tab>")
+		pcall(vim.keymap.del, { "i", "s" }, "<S-Tab>")
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")

@@ -18,7 +18,7 @@ set -euo pipefail
 # ---- config ------------------------------------------------------------------
 PYTHON_VERSION="${SCAFFOLD_PYTHON_VERSION:-3.11}"
 PROJECTS_ROOT="${SCAFFOLD_PROJECTS_ROOT:-$HOME/projects}"
-VAULT_ROOT="${SCAFFOLD_VAULT_ROOT:-$HOME/vault}"
+VAULT_ROOT="${SCAFFOLD_VAULT_ROOT:-$HOME/convergence}"
 GITHUB_USER="${SCAFFOLD_GITHUB_USER:-PurpleAFK}"
 
 AUTHOR_NAME="$(git config --global user.name  2>/dev/null || echo "$GITHUB_USER")"
