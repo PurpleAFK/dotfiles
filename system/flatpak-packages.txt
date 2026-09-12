@@ -1,0 +1,11 @@
+app.zen_browser.zen
+com.github.johnfactotum.Foliate
+dev.geopjr.Archives
+md.obsidian.Obsidian
+net.ankiweb.Anki
+net.davidotek.pupgui2
+net.lutris.Lutris
+one.ablaze.floorp
+org.gnome.Aisleriot
+org.kde.haruna
+org.localsend.localsend_app
