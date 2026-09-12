@@ -37,6 +37,8 @@ return {
 			history = true,
 			updateevents = "TextChanged,TextChangedI",
 			enable_autosnippets = true,
+			region_check_events = "CursorMoved,CursorMovedI,InsertEnter",
+			delete_check_events = "TextChanged,InsertLeave",
 		})
 
 		local kind_menu = {

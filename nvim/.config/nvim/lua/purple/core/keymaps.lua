@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
-keymap.set("i", "kj", "<ESC>l", { desc = "Exit insert mode with kj" })
+keymap.set("i", "kj", "<ESC>", { desc = "Exit insert mode with kj" })
 keymap.set("i", "<C-h>", "<C-w>", { desc = "Delete previous word (Ctrl+Backspace/C-h)" })
 keymap.set("i", "<C-BS>", "<C-w>", { desc = "Delete previous word (Ctrl+Backspace/C-BS)" })
 vim.keymap.set("n", "<leader>cl", ":nohl<CR>", { desc = "Clear seach highlights" })
@@ -31,7 +31,7 @@ vim.keymap.set("n", "<leader>t", function()
 	if test_buf and vim.api.nvim_buf_is_valid(test_buf) then
 		vim.api.nvim_buf_delete(test_buf, { force = true })
 	end
-	vim.cmd("vsplit | terminal " .. vim.fn.expand("$HOME") .. "/contests/scripts/cptest")
+	vim.cmd("vsplit | terminal " .. vim.fn.expand("$HOME") .. "/cf-contests/scripts/test.sh")
 	vim.cmd("vertical resize 50")
 	test_buf = vim.api.nvim_get_current_buf()
 	vim.cmd("startinsert")
