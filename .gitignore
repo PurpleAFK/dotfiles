@@ -3,3 +3,5 @@ bin/.local/bin/*
 # But allow your custom shell scripts
 !bin/.local/bin/*.sh
 !bin/.local/bin/aider-install
+# Runtime state written by hypr/.config/hypr/scripts/wallpapers.sh (legacy location; new location is $XDG_STATE_HOME/wallpapers/last)
+hypr/.config/hypr/last_wallpaper.txt

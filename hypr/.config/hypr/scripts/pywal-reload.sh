@@ -1,98 +1,98 @@
 #!/usr/bin/env bash
+# pywal-reload.sh — push the palette currently in ~/.cache/wal to running apps.
+#
+# Usage: pywal-reload.sh [--startup]
+#
+# Called by wallpapers.sh after `wal -n -e -i <image>`. The -e makes wal skip
+# its own reload hooks (pywal16 would otherwise SIGUSR2 waybar and run pywalfox
+# itself, on top of what this script does). Everything here therefore happens
+# exactly once, and nothing here sends a notification or reloads Hyprland's
+# config on an ordinary wallpaper change.
+#
+# --startup: also run `hyprctl reload`. Only wanted at login, where it clears
+# the "source file missing" warning a fresh machine gets before the first wal
+# run. Never used for interactive changes: a config reload re-applies rules,
+# re-sets the keyboard layout and re-animates layers, which is disruptive to
+# anything open at the time (e.g. rofi).
+#
+# What consumes which generated file:
+#   Hyprland  hyprland.conf  source = ~/.cache/wal/colors-hypr.conf   (user template)
+#   hyprlock  hyprlock.conf  source = ~/.cache/wal/hyprlock-colors.conf (user template)
+#   waybar    style.css      @import ~/.cache/wal/colors-waybar.css     (pywal built-in)
+#   swaync    style.css      @import ~/.cache/wal/colors-waybar.css     (pywal built-in)
+#   kitty     kitty.conf     include ~/.cache/wal/colors-kitty.conf     (pywal built-in)
+#   rofi      menu.rasi      @import ~/.cache/wal/colors-rofi-dark.rasi (pywal built-in;
+#                            rofi reads it on launch, nothing to reload)
 
-# pywal-reload.sh
-# This script applies the generated Pywal colors to various applications.
+# --- toggles: set to 0 to skip a step -------------------------------------
+RELOAD_HYPRLAND=1   # border colours via hyprctl keyword
+RELOAD_WAYBAR=1     # SIGUSR2 = waybar restarts its bars once (only way to re-read CSS)
+RELOAD_SWAYNC=1     # swaync-client --reload-css
+RELOAD_KITTY=1      # kitty @ set-colors on every kitty socket
+RELOAD_XRDB=1       # xrdb -merge for XWayland apps
+RELOAD_PYWALFOX=0   # pywalfox update (Firefox theme)
+# --------------------------------------------------------------------------
 
-# Source the pywal cache
-if [ -f "$HOME/.cache/wal/colors.sh" ]; then
-    . "$HOME/.cache/wal/colors.sh"
-else
-    echo "Pywal colors not found. Please run 'wal -i <image>' first." >&2
+WAL_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/wal"
+HYPR_COLORS="$WAL_CACHE/colors-hypr.conf"
+STARTUP=0
+[ "${1:-}" = "--startup" ] && STARTUP=1
+
+if [ ! -f "$WAL_CACHE/colors.sh" ]; then
+    echo "pywal-reload: $WAL_CACHE/colors.sh not found; run 'wal -i <image>' first" >&2
     exit 1
 fi
 
-# Pywalfox
-# Requires 'pywalfox update' to be installed and in your PATH
-# This updates browser themes. Remove if not using pywalfox.
-pywalfox update &>/dev/null
+have()    { command -v "$1" >/dev/null 2>&1; }
+running() { pgrep -x "$1"  >/dev/null 2>&1; }
 
-# Wal_tpl for GTK/Qt/Other templates
-# Requires 'wal_tpl' to be installed (e.g., pip install wal_tpl)
-# Check Narsell's specific wal_tpl setup if you use this.
-# wal_tpl &>/dev/null # Uncomment if you use wal_tpl
+# Value of a `$name = value` line in the generated Hyprland colour file.
+hypr_var() { sed -n 's/^\$'"$1"'[[:space:]]*=[[:space:]]*//p' "$HYPR_COLORS" | head -n 1; }
 
-# Dunst
-# Reload Dunst to apply new colors
-# pkill dunst && dunst & disown
-
-# Swaync
-# Reload Swaync to apply new colors
-killall -SIGUSR2 swaync
-
-if pgrep -x "waybar" > /dev/null; then
-    killall -SIGUSR2 waybar # Reload existing Waybar
-else
-    waybar & disown # Start Waybar if it's not running
+# --- Hyprland -------------------------------------------------------------
+if [ "$RELOAD_HYPRLAND" = 1 ] && have hyprctl && [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+    if [ "$STARTUP" = 1 ]; then
+        hyprctl reload >/dev/null 2>&1
+    elif [ -f "$HYPR_COLORS" ]; then
+        active=$(hypr_var active_border)
+        inactive=$(hypr_var inactive_border)
+        if [ -n "$active" ] && [ -n "$inactive" ]; then
+            hyprctl --batch \
+                "keyword general:col.active_border $active ; keyword general:col.inactive_border $inactive" \
+                >/dev/null 2>&1
+        fi
+    fi
 fi
 
-# Kitty
-# Send IPC command to Kitty to reload colors
-# kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf
-
-# Kitty — only attempt if a Kitty socket is available
-if pgrep -x "kitty" > /dev/null; then
-    kitty @ set-colors -a ~/.cache/wal/colors-kitty.conf 2>/dev/null || true
+# --- Waybar ---------------------------------------------------------------
+if [ "$RELOAD_WAYBAR" = 1 ] && running waybar; then
+    pkill -SIGUSR2 -x waybar
 fi
 
-# Hyprland Border Colors
-# Apply active and inactive border colors from pywal
-# hyprctl keyword general:col.active_border "rgb($color1)"
-# hyprctl keyword general:col.inactive_border "rgb($color0)"
-hyprctl keyword decoration:active_opacity 1.0
-hyprctl keyword decoration:inactive_opacity 0.9
-
-# You might have other Hyprland elements to update here
-# e.g., if you use Pyprland, specific window rules, etc.
-# Narsell has a specific pyprland setup.
-
-# Generate Hyprlock colors file
-# Hyprlock — only run if the script exists
-HYPRLOCK_SCRIPT="$HOME/.config/hypr/scripts/hyprlock-pywal-colors.sh"
-if [ -f "$HYPRLOCK_SCRIPT" ]; then
-    bash "$HYPRLOCK_SCRIPT"
-else
-    echo "Warning: hyprlock-pywal-colors.sh not found, skipping." >&2
+# --- swaync ---------------------------------------------------------------
+if [ "$RELOAD_SWAYNC" = 1 ] && running swaync && have swaync-client; then
+    swaync-client --reload-css >/dev/null 2>&1
 fi
 
-# Zathura
-# Notifies Zathura to reload its config/colors
-# (Requires Zathura to be running)
-# pkill -USR1 zathura
-
-# EWW (if you use it)
-# Narsell uses EWW widgets, which would also be themed by Pywal.
-# This might involve restarting or refreshing EWW daemons/widgets.
-# If you don't use EWW, you can ignore/remove this.
-# eww reload &>/dev/null # Example
-
-# VSCode (if you use thewal theme)
-# This usually involves reloading VSCode or restarting it.
-# Check Narsell's specific VSCode setup.
-# code --reload-windows &>/dev/null # Example
-
-
-# Apply KDE color scheme — install it first, then apply by name
-KDE_COLORS_DIR="$HOME/.local/share/color-schemes"
-mkdir -p "$KDE_COLORS_DIR"
-cp ~/.cache/wal/colors-kde.colors "$KDE_COLORS_DIR/Pywal.colors"
-plasma-apply-colorscheme Pywal 2>/dev/null || true
-
-# Dolphin
-if pgrep -x "dolphin" > /dev/null; then
-    pkill -x dolphin
-    sleep 1.5
-    QT_QPA_PLATFORM=wayland XDG_CURRENT_DESKTOP=KDE dolphin & disown
+# --- Kitty ----------------------------------------------------------------
+# wal already wrote OSC colour sequences to every open pty, and kitty.conf
+# includes colors-kitty.conf for new windows. This covers windows whose pty wal
+# could not reach. kitty appends its PID to the listen_on path: glob for them.
+if [ "$RELOAD_KITTY" = 1 ] && have kitty; then
+    for sock in /tmp/kitty-socket*; do
+        [ -S "$sock" ] || continue
+        kitty @ --to "unix:$sock" set-colors -a -c "$WAL_CACHE/colors-kitty.conf" >/dev/null 2>&1
+    done
 fi
 
-echo "Pywal theme applied to applications."
+# --- Xresources (XWayland apps) ------------------------------------------
+if [ "$RELOAD_XRDB" = 1 ] && have xrdb && [ -f "$WAL_CACHE/colors.Xresources" ]; then
+    xrdb -merge -quiet "$WAL_CACHE/colors.Xresources" 2>/dev/null
+fi
+
+# --- Firefox via pywalfox -------------------------------------------------
+if [ "$RELOAD_PYWALFOX" = 1 ] && have pywalfox; then
+    pywalfox update >/dev/null 2>&1
+fi
+
 exit 0
