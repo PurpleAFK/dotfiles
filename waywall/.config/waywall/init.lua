@@ -27,7 +27,7 @@ local thin_active = false
 -- ==== CONFIG TABLE ====
 local config = {
 	input = {
-		layout = "mc",
+		layout = "uscustom",
 		repeat_rate = 40,
 		repeat_delay = 300,
 		remaps = keyboard_remaps,
@@ -464,9 +464,12 @@ local make_res = function(width, height, enable, disable)
 end
 
 local resolutions = {
-	thin = make_res(cfg.res_1440 and 350 or 340, cfg.res_1440 and 1100 or 1080, thin_enable, res_disable),
-	tall = make_res(384, 16384, tall_enable, res_disable),
-	wide = make_res(cfg.res_1440 and 2560 or 1920, cfg.res_1440 and 400 or 300, wide_enable, res_disable),
+	-- thin = make_res(cfg.res_1440 and 350 or 340, cfg.res_1440 and 1100 or 1080, thin_enable, res_disable),
+	-- tall = make_res(384, 16384, tall_enable, res_disable),
+	-- wide = make_res(cfg.res_1440 and 2560 or 1920, cfg.res_1440 and 400 or 300, wide_enable, res_disable),
+	thin = function() end,
+	tall = function() end,
+	wide = function() end,
 }
 
 local function resize_helper(mode, run)

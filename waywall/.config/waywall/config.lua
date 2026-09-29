@@ -22,9 +22,12 @@ return {
 
 	-- ==== KEYBINDS ====
 	-- resolution change actions
-	thin = { key = "*-Y", f3_safe = false },
-	wide = { key = "*-B", f3_safe = true },
-	tall = { key = "*-H", f3_safe = false },
+	-- thin = { key = "*-Y", f3_safe = false },
+	-- wide = { key = "*-B", f3_safe = true },
+	-- tall = { key = "*-H", f3_safe = false },
+	thin = { key = "*-8", f3_safe = false },
+	wide = { key = "*-9", f3_safe = true },
+	tall = { key = "*-0", f3_safe = false },
 
 	-- startup actions
 	toggle_fullscreen_key = "Shift-O",

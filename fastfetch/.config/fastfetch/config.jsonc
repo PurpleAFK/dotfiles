@@ -8,8 +8,8 @@
         //"type": "small",
         "padding": {
             "top": 1,
-	    "left": 1,
-        }
+	          "left": 1,
+        },
     },
     "display": {
         "separator": " "
@@ -84,10 +84,10 @@
         //     "type": "disk",
         //     "folders": "/home"
         // },
-        // {
-        //     "key": "│ {#35} memory  {#keys}│",
-        //     "type": "memory"
-        // },
+        {
+            "key": "│ {#35} memory  {#keys}│",
+            "type": "memory"
+        },
         // {
         //     "key": "│ {#36}󰩟 network {#keys}│",
         //     "type": "localip",
