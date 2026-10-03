@@ -3,13 +3,13 @@ return {
 	--  name = "catppuccin",
 	-- "rose-pine/neovim",
 	-- name = "rose-pine",
-	-- "ellisonleao/gruvbox.nvim",
-	-- name = "gruvbox",
-	"rebelot/kanagawa.nvim",
-	name = "kanagawa",
+	"ellisonleao/gruvbox.nvim",
+	name = "gruvbox",
+	-- "rebelot/kanagawa.nvim",
+	-- name = "kanagawa",
 	priority = 1000,
 	config = function()
-		vim.cmd("colorscheme kanagawa")
+		vim.cmd("colorscheme gruvbox")
 	end,
 }
 
