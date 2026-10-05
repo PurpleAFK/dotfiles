@@ -3,6 +3,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main",
+	-- last commit supporting Nvim 0.11 (c82bf96f dropped it); unpin after upgrading to 0.12
+	commit = "90cd6580e720caedacb91fdd587b747a6e77d61f",
 	lazy = false,
 	build = ":TSUpdate",
 	dependencies = {
